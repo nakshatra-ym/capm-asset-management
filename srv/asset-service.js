@@ -30,4 +30,11 @@ module.exports = cds.service.impl(async function () {
 
   });
 
+  this.before("CREATE","Assets",(req) => {
+    if(!req.data.status){
+      req.data.status = "Available";
+    }
+  })
+
+
 });

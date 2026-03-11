@@ -1,0 +1,9 @@
+# POST http://localhost:4004/odata/v4/asset/Assets(ID=2)/assignAsset
+# Content-Type: application/json
+
+# {
+#   "employeeID": "2"
+# }
+
+
+GET http://localhost:4004/odata/v4/asset/Assets

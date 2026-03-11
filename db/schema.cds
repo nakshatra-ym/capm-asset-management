@@ -1,14 +1,14 @@
 namespace asset.management;
 
 entity Employees {
-  key ID : UUID;
+  key ID : Integer;
   name   : String;
   email  : String;
   department : String;
 }
 
 entity Assets {
-  key ID : UUID;
+  key ID : Integer;
   name   : String;
   type   : String;
   serialNumber : String;
