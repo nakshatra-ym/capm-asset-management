@@ -35,6 +35,4 @@ module.exports = cds.service.impl(async function () {
       req.data.status = "Available";
     }
   })
-
-
 });
