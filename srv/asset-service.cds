@@ -2,46 +2,51 @@ using { asset.management as db } from '../db/schema';
 
 service AssetService {
 
-
+  @UI.Facets: [
+    {
+      $Type  : 'UI.ReferenceFacet',
+      Label  : 'Assets',
+      Target : 'assets/@UI.LineItem'
+    }
+  ]
   @UI.LineItem: [
     { Value: name },
     { Value: email },
-    { Value: department }
-  ]
-  entity Employees as projection on db.Employees;
-   @UI.LineItem: [
-    { Value: name },
-    { Value: type },
-    { Value: status },
-    { Value: employee.name },
-     {
+    { Value: department },
+    {
       $Type  : 'UI.DataFieldForAction',
       Action : 'AssetService.assignAsset',
       Label  : 'Assign Asset'
     }
   ]
-  @odata.draft.enabled
-  entity Assets as projection on db.Assets
-  actions {
-      @(
-        Core.OperationAvailable: ($self.status != 'Assigned')
-      )
+  @UI.Identification: [
+    {
+      $Type  : 'UI.DataFieldForAction',
+      Action : 'AssetService.assignAsset',
+      Label  : 'Assign Asset'
+    }
+  ]
+  entity Employees as projection on db.Employees
+  actions{
+    //       // @(
+//       //   Core.OperationAvailable: ($self.status != 'Assigned')
+//       // )
       @Common.SideEffects: {
-        TargetProperties: ['status', 'employee_ID','name']
+        TargetProperties: ['assets']
       }
-      @requires: 'Admin'
-      action assignAsset(
+//       // @requires: 'Admin'
+    action assignAsset(
         @(
          Common        : {
                 ValueListWithFixedValues : true,
                 ValueList : {
-                    Label          : 'Employees',
-                    CollectionPath : 'Employees',
+                    Label          : 'Assets',
+                    CollectionPath : 'Assets',
                     Parameters     : [
                       {
                         $Type             : 'Common.ValueListParameterInOut',
                         ValueListProperty : 'ID',
-                        LocalDataProperty : employeeID
+                        LocalDataProperty : assetID
                       },
                       {
                         $Type : 'Common.ValueListParameterDisplayOnly',
@@ -49,14 +54,37 @@ service AssetService {
                       },
                       {
                         $Type : 'Common.ValueListParameterDisplayOnly',
-                        ValueListProperty : 'department'
+                        ValueListProperty : 'type'
+                      },
+                      {
+                        $Type : 'Common.ValueListParameterConstant',
+                        ValueListProperty : 'status',
+                        Constant : 'Available'
                       }
                     ]
                 }
             }
       )
-        employeeID : Integer
+        assetID : Integer
       );
-  };
+  }
+  
+  
+   @UI.LineItem: [
+    { Value: name },
+    { Value: type },
+    { Value: status },
+    {
+      $Type  : 'UI.DataFieldForAction',
+      Action : 'AssetService.unassignAsset',
+      Label  : 'Unassign Asset'
+    }
+  ]
+  @odata.draft.enabled
+  entity Assets as projection on db.Assets
+  actions{
+    action unassignAsset()
+  }
+
 
 }

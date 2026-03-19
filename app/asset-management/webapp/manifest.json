@@ -27,7 +27,7 @@
     }
   },
   "sap.ui": {
-    "technology": "UI5",
+    "technology": "UI5",  
     "icons": {
       "icon": "",
       "favIcon": "",
@@ -85,49 +85,42 @@
       "routes": [
         {
           "pattern": ":?query:",
-          "name": "AssetsList",
-          "target": "AssetsList"
+          "name": "EmployeesList",
+          "target": "EmployeesList"
         },
         {
-          "pattern": "Assets({key}):?query:",
-          "name": "AssetsObjectPage",
-          "target": "AssetsObjectPage"
+          "pattern": "Employees({key}):?query:",
+          "name": "EmployeesObjectPage",
+          "target": "EmployeesObjectPage"
         }
       ],
       "targets": {
-        "AssetsList": {
+        "EmployeesList": {
           "type": "Component",
-          "id": "AssetsList",
+          "id": "EmployeesList",
           "name": "sap.fe.templates.ListReport",
           "options": {
             "settings": {
-              "contextPath": "/Assets",
+              "contextPath": "/Employees",
               "variantManagement": "Page",
               "navigation": {
-                "Assets": {
+                "Employees": {
                   "detail": {
-                    "route": "AssetsObjectPage"
-                  }
-                }
-              },
-              "controlConfiguration": {
-                "@com.sap.vocabularies.UI.v1.LineItem": {
-                  "tableSettings": {
-                    "type": "ResponsiveTable"
+                    "route": "EmployeesObjectPage"
                   }
                 }
               }
             }
           }
         },
-        "AssetsObjectPage": {
+        "EmployeesObjectPage": {
           "type": "Component",
-          "id": "AssetsObjectPage",
+          "id": "EmployeesObjectPage",
           "name": "sap.fe.templates.ObjectPage",
           "options": {
             "settings": {
               "editableHeaderContent": false,
-              "contextPath": "/Assets"
+              "contextPath": "/Employees"
             }
           }
         }

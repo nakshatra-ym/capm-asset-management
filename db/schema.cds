@@ -6,6 +6,8 @@ entity Employees : managed {
   name   : String;
   email  : String;
   department : String;
+
+  assets : Composition of many Assets on assets.employee = $self
 }
 
 entity Assets : managed {

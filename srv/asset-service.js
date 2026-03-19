@@ -2,12 +2,19 @@ const cds = require('@sap/cds');
 
 module.exports = cds.service.impl(async function () {
 
-  const { Assets } = this.entities;
+  const { Assets, Employees } = this.entities;
+  
 
   this.on('assignAsset', async (req) => {
 
-    const assetID = req.params[0].ID;
-    const { employeeID } = req.data;
+    
+
+    console.log(req.params);
+    console.log(req.data);
+    
+    
+    const employeeID = req.params[0].ID;
+    const { assetID } = req.data;
 
     const asset = await SELECT.one.from(Assets).where({ ID: assetID });
 
@@ -30,9 +37,9 @@ module.exports = cds.service.impl(async function () {
 
   });
 
-  this.before("CREATE","Assets",(req) => {
-    if(!req.data.status){
-      req.data.status = "Available";
-    }
-  })
+  // this.before("CREATE","Assets",(req) => {
+  //   if(!req.data.status){
+  //     req.data.status = "Available";
+  //   }
+  // })
 });

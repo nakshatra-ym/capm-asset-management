@@ -22,11 +22,8 @@
         "strategy": "mock",
         "users": {
           "alice": {
-            "password": "password123",
+            "password": "alice",
             "roles": ["Admin"]
-          },
-          "bob": {
-            "roles": ["User"]
           }
         },
         "[production]": {

@@ -1,6 +1,6 @@
 POST http://localhost:4004/odata/v4/asset/Assets(ID=2,IsActiveEntity=true)/assignAsset
 Content-Type: application/json
-Authorization: Basic alice:password123
+Authorization: Basic alice:
 
 {
   "employeeID": "2"
