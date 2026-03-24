@@ -24,9 +24,9 @@ service AssetService {
   }]
   entity Employees as projection on db.Employees
     actions {
-      //       // @(
-      //       //   Core.OperationAvailable: ($self.status != 'Assigned')
-      //       // )
+            // @(
+            //   Core.OperationAvailable: ($self.status != 'Assigned')
+            // )
       @Common.SideEffects: {TargetProperties: ['assets']}
       //       // @requires: 'Admin'
       action assignAsset(
@@ -74,7 +74,7 @@ service AssetService {
   @odata.draft.enabled
   entity Assets    as projection on db.Assets
     actions {
-      @Common.SideEffects: {TargetProperties: ['assets']}
+      @Common.SideEffects: {TargetProperties: ['employee']}
       action unassignAsset()
     }
 
