@@ -1,0 +1,4 @@
+ID,name,category,maxPerEmployee,isConsumable
+1,Laptop,IT,1,false
+2,Monitor,IT,2,false
+3,Mouse,IT,5,true

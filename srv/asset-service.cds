@@ -1,82 +1,42 @@
 using {asset.management as db} from '../db/schema';
 
-service AssetService {
+service EmployeeService {
 
-  @UI.Facets        : [{
-    $Type : 'UI.ReferenceFacet',
-    Label : 'Assets',
-    Target: 'assets/@UI.LineItem'
-  }]
-  @UI.LineItem      : [
-    {Value: name},
-    {Value: email},
-    {Value: department},
-    {
-      $Type : 'UI.DataFieldForAction',
-      Action: 'AssetService.assignAsset',
-      Label : 'Assign Asset'
-    }
-  ]
-  @UI.Identification: [{
-    $Type : 'UI.DataFieldForAction',
-    Action: 'AssetService.assignAsset',
-    Label : 'Assign Asset'
-  }]
-  entity Employees as projection on db.Employees
-    actions {
-            // @(
-            //   Core.OperationAvailable: ($self.status != 'Assigned')
-            // )
-      @Common.SideEffects: {TargetProperties: ['assets']}
-      //       // @requires: 'Admin'
-      action assignAsset(
-                         @(Common: {
-                           ValueListWithFixedValues: true,
-                           ValueList               : {
-                             Label         : 'Assets',
-                             CollectionPath: 'Assets',
-                             Parameters    : [
-                               {
-                                 $Type            : 'Common.ValueListParameterInOut',
-                                 ValueListProperty: 'ID',
-                                 LocalDataProperty: assetID
-                               },
-                               {
-                                 $Type            : 'Common.ValueListParameterDisplayOnly',
-                                 ValueListProperty: 'name'
-                               },
-                               {
-                                 $Type            : 'Common.ValueListParameterDisplayOnly',
-                                 ValueListProperty: 'type'
-                               },
-                               {
-                                 $Type            : 'Common.ValueListParameterConstant',
-                                 ValueListProperty: 'status',
-                                 Constant         : 'Available'
-                               }
-                             ]
-                           }
-                         })
-                         assetID: Integer);
-    }
+  @readonly
+  entity Employee   as projection on db.Employee;
+  @readonly
+  entity Asset      as projection on db.Asset 
+  actions {
+    action assign(employeeID : Integer);
+    action unassign();
+  };
+  @readonly
+  entity AssetType  as projection on db.AssetType;
+  @readonly
+  entity AssetModel as projection on db.AssetModel;
+  @readonly
+  entity Location   as projection on db.Location;
+  @readonly
+  entity Department as projection on db.Department;
+
+  @readonly
+  entity Stock       as projection on db.Stock;
+
+  @readonly
+  entity AssetHistory as projection on db.AssetAssignmentHistory;
+
+  @readonly
+  entity StockMovement as projection on db.StockMovement;
+}
 
 
-  @UI.LineItem: [
-    {Value: name},
-    {Value: type},
-    {Value: status},
-    {
-      $Type : 'UI.DataFieldForAction',
-      Action: 'AssetService.unassignAsset',
-      Label : 'Unassign Asset'
-    }
-  ]
-  @odata.draft.enabled
-  entity Assets    as projection on db.Assets
-    actions {
-      @Common.SideEffects: {TargetProperties: ['employee']}
-      action unassignAsset()
-    }
+service AdminService {
 
+  entity AssetType  as projection on db.AssetType;
+  entity AssetModel as projection on db.AssetModel;
+  entity Location   as projection on db.Location;
+  entity Department as projection on db.Department;
+  entity Vendor     as projection on db.Vendor;
 
 }
+

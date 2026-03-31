@@ -1,10 +1,15 @@
-POST http://localhost:4004/odata/v4/asset/Assets(ID=2,IsActiveEntity=true)/assignAsset
+
+
+
+GET http://localhost:4004/odata/v4/asset/Asset
+
+###
+POST http://localhost:4004/odata/v4/asset/Asset(ID=1001,IsActiveEntity=true)/assign
 Content-Type: application/json
-Authorization: Basic alice:
 
 {
-  "employeeID": "2"
+  "employeeID": 101
 }
 
-
-# GET http://localhost:4004/odata/v4/asset/Assets
+###
+POST http://localhost:4004/odata/v4/asset/Asset(ID=1001,IsActiveEntity=true)/unassign

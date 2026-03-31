@@ -1,0 +1,5 @@
+ID,serialNumber,assetType_ID,model_ID,status,employee_ID
+1001,MB-001,1,1,Available,
+1002,MB-002,1,1,Assigned,101
+1003,DL-001,1,2,Available,
+1004,MON-001,2,3,Available,
