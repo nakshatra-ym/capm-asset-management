@@ -34,26 +34,6 @@ modules:
       buildpack: nodejs_buildpack
     requires:
       - name: asset-management-db
-  - name: asset-management
-    type: approuter.nodejs
-    path: app/router
-    parameters:
-      keep-existing-routes: true
-      disk-quota: 256M
-      memory: 256M
-    requires:
-      - name: srv-api
-        group: destinations
-        properties:
-          name: srv-api # must be used in xs-app.json as well
-          url: ~{srv-url}
-      - name: asset-management-html5-runtime
-    provides:
-      - name: app-api
-        properties:
-          app-protocol: ${protocol}
-          app-uri: ${default-uri}
-
   - name: asset-management-app-deployer
     type: com.sap.application.content
     path: gen
